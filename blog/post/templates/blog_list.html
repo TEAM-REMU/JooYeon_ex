@@ -1,0 +1,35 @@
+{% extends 'base.html' %}
+
+{% block contents %}
+
+
+<div class="container">
+    {% if user.is.authenticated %}
+    {{user.username}} 님 환영합니다!
+    {% endif%}
+
+    <a href="{% url 'blog_new' %}"><button class="btn btn-outline-dark my-2 my-sm-0">게시글 작성</button></a>
+    
+    {% for blog in posts %}
+    <a href = "{% url 'read_blog_one' blog.id %}"><h3>제목: {{ blog.title }}</h3></a>
+    <h6>조회수: {{ blog.count }} </h6>
+    <hr/>
+    {% endfor %}
+
+    <!-- 여기서 ?뒤의 page가 views.py에 있는 스트링값 -->
+    {% if posts.has_previous %}
+    <a href = "?page=1">맨 앞으로</a>
+    <a href = "?page={{posts.previous_page_number}}">이전으로</a>
+    {% endif %}
+
+    <span>{{posts.number}}</span>
+    <span>/</span>
+    <span>{{posts.paginator.num_pages}}</span>
+
+    {% if posts.has_next %}
+    <a href = "?page={{posts.next_page_number}}">다음으로</a>
+    <a href = "?page={{posts.paginator.num_pages}}">맨 뒤로</a>
+    {% endif %}
+
+</div>
+{% endblock %}  

@@ -1,0 +1,40 @@
+{% extends 'base.html' %}
+
+{% load static %}
+
+
+
+{% block contents %}
+
+<div class="container">
+
+  <form action="{% url 'login' %}" method="POST">
+    {% csrf_token %}
+    <div style="text-align: center; font-size: 50px; margin-top: 100px;"><b>Log In</b></div>
+    <hr>
+    <!-- Material input -->
+
+    <div style="text-align: center;">
+
+
+      <div style="width: 300px;">
+        <input name="username" class="form-control" type="text" placeholder="Input Your ID" style="margin-left: 400px;">
+      </div>
+      <br />
+
+      <div style="width: 300px;">
+        <input name="password" class="form-control" type="password" placeholder="Input Your PassWord"
+          style="margin-left: 400px;">
+      </div>
+
+
+      <hr>
+      <button class="btn btn-outline-dark my-2 my-sm-0" type="submit" value="login">Log In</button>
+ 
+    </div>
+
+  </form>
+  {{error}}
+</div>
+
+{% endblock %}
